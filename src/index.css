@@ -1,73 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Tactile Editorial Grid · theme: dual (dark-obsidian & warm-paper) */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  --font-serif: "Playfair Display", Georgia, serif;
-  
-  --color-brand-primary: #a855f7; /* purple-500 */
-  --color-brand-secondary: #3b82f6; /* blue-500 */
-  --color-brand-dark: #050505; /* rich obsidian black */
+}
+
+:root {
+  /* Dark Obsidian Theme (Default) */
+  --bg-canvas: #08080a;
+  --bg-frame: #0d0d10;
+  --bg-surface: #111114;
+  --bg-surface-elevated: #16161b;
+  --color-ink: #f4f4f7;
+  --color-ink-2: #a1a1aa;
+  --color-ink-muted: #71717a;
+  --color-rule: #27272a;
+  --color-rule-light: #3f3f46;
+  --outline-stroke: rgba(255, 255, 255, 0.7);
+
+  /* Multi-Layer Curtain Wipe Slabs (Dark Mode: Slate into Bright White) */
+  --wipe-slab-1: #3A3A44;
+  --wipe-slab-2: #FFFFFF;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 200ms;
+}
+
+/* Warm Tactile Linen / Oatmeal Paper Theme (from Reference Video) */
+[data-theme="paper"] {
+  --bg-canvas: #E6E3DC;
+  --bg-frame: #EDE8E1;
+  --bg-surface: #F2EEE8;
+  --bg-surface-elevated: #E5DFD5;
+  --color-ink: #1C1C1C;
+  --color-ink-2: #5A5A5E;
+  --color-ink-muted: #84848A;
+  --color-rule: #1C1C1C;
+  --color-rule-light: rgba(28, 28, 28, 0.22);
+  --outline-stroke: #1C1C1C;
+
+  /* Multi-Layer Curtain Wipe Slabs (Light Mode: Crisp White into Charcoal Black) */
+  --wipe-slab-1: #FFFFFF;
+  --wipe-slab-2: #1C1C1C;
 }
 
 /* Custom Base Styles */
 html {
   scroll-behavior: smooth;
-  background-color: #050505;
-  color: #f3f4f6;
-  overflow-x: hidden;
+  background-color: var(--bg-canvas);
+  color: var(--color-ink);
+  overflow-x: clip;
 }
 
-/* Smooth high-end custom scrollbars */
+body {
+  overflow-x: clip;
+  background-color: var(--bg-canvas);
+  color: var(--color-ink);
+}
+
+/* Outlined Display Text Utility */
+.text-outline {
+  -webkit-text-stroke: 1.8px var(--outline-stroke);
+  color: transparent;
+  transition: -webkit-text-stroke 300ms ease;
+}
+
+.text-outline-thick {
+  -webkit-text-stroke: 2.2px var(--outline-stroke);
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .text-outline-thick {
+    -webkit-text-stroke: 2.6px var(--outline-stroke);
+    color: transparent;
+  }
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Continuous Subtle Rotate Animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+/* Restrained scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #080808;
+  background: var(--bg-canvas);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 10px;
+  background: var(--color-rule-light);
+  border-radius: 9999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a855f7;
-}
-
-/* Custom Selection style */
+/* Selection style */
 ::selection {
-  background-color: rgba(168, 85, 247, 0.3);
-  color: #ffffff;
-}
-
-/* Floating animation keyframes */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Background grid accent */
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-}
-
-/* Hide the Spline watermark logo */
-a[href*="spline.design"] {
-  display: none !important;
+  background-color: rgba(28, 28, 28, 0.2);
+  color: var(--color-ink);
 }

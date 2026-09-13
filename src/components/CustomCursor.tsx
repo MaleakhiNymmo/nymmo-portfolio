@@ -1,104 +1,106 @@
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [hoverText, setHoverText] = useState('');
-
-  // Use motion values for hardware accelerated transforms
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 700, mass: 0.1 };
-  const cursorX = useSpring(mouseX, springConfig);
-  const cursorY = useSpring(mouseY, springConfig);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if device supports touch
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    // Only run on fine-pointer devices (ignore touch/mobile)
+    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
 
     setIsVisible(true);
 
-    const moveCursor = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let rafId: number;
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
 
-      // Find if element or parent has target classes
-      const clickable = target.closest('a, button, [role="button"], .hover-target');
-      if (clickable) {
-        setIsHovered(true);
-        const text = clickable.getAttribute('data-cursor-text') || '';
-        setHoverText(text);
-      } else {
-        setIsHovered(false);
-        setHoverText('');
+      // Update inner dot immediately with zero latency
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
       }
     };
 
-    window.addEventListener('mousemove', moveCursor);
-    window.addEventListener('mouseover', handleMouseOver);
+    // Smooth 120fps lerp loop for the outer trailing ring
+    const render = () => {
+      // Lerp smoothing factor (0.22 = fast, silky smooth, responsive)
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      }
+
+      rafId = requestAnimationFrame(render);
+    };
+
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const clickable = target.closest('a, button, [role="button"], .hover-target, input, textarea');
+      if (clickable) {
+        const text = clickable.getAttribute('data-cursor-text') || '';
+        setHoverText(text);
+        setIsHovered(true);
+      } else {
+        setHoverText('');
+        setIsHovered(false);
+      }
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
+    rafId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      cancelAnimationFrame(rafId);
     };
-  }, [mouseX, mouseY]);
+  }, []);
 
   if (!isVisible) return null;
 
   return (
-    <>
-      {/* Outer dynamic spring circle */}
-      <motion.div
-        id="custom-cursor-dot"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        animate={{
-          width: isHovered ? (hoverText ? 80 : 40) : 24,
-          height: isHovered ? (hoverText ? 80 : 40) : 24,
-          backgroundColor: isHovered ? 'rgba(148, 163, 184, 0.15)' : 'rgba(255, 255, 255, 0.2)',
-          borderColor: isHovered ? '#94a3b8' : '#ffffff',
-          borderWidth: isHovered ? '1.5px' : '1px',
-        }}
-        transition={{ type: 'tween', ease: 'backOut', duration: 0.2 }}
-        className="fixed top-0 left-0 rounded-full border border-white pointer-events-none z-50 flex items-center justify-center backdrop-blur-[1px]"
+    <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
+      {/* Outer fluid trailing ring with mix-blend-difference */}
+      <div
+        ref={ringRef}
+        style={{ willChange: 'transform' }}
+        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 transition-[width,height,background-color,border-color] duration-200 ease-out flex items-center justify-center mix-blend-difference ${
+          isHovered
+            ? hoverText
+              ? 'w-20 h-20 bg-white/20 border-white'
+              : 'w-12 h-12 bg-white/15 border-white'
+            : 'w-7 h-7 bg-transparent border-white/60'
+        }`}
       >
         {hoverText && (
-          <motion.span
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-[10px] font-bold tracking-widest uppercase font-mono text-slate-300 whitespace-nowrap"
-          >
+          <span className="text-[9px] font-mono font-bold tracking-widest text-white uppercase text-center px-1 select-none pointer-events-none">
             {hoverText}
-          </motion.span>
+          </span>
         )}
-      </motion.div>
+      </div>
 
-      {/* Small constant follow dot */}
-      <motion.div
-        id="custom-cursor-inner"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        animate={{
-          scale: isHovered ? 0 : 1,
-        }}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-slate-400 pointer-events-none z-50 mix-blend-difference"
+      {/* Center solid dot that locks instantly to cursor with 0ms delay */}
+      <div
+        ref={dotRef}
+        style={{ willChange: 'transform' }}
+        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white transition-opacity duration-150 mix-blend-difference ${
+          isHovered ? 'w-1 h-1 opacity-0' : 'w-1.5 h-1.5 opacity-100'
+        }`}
       />
-    </>
+    </div>
   );
 }

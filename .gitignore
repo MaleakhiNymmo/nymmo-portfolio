@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Antigravity / Agent customizations
+.agents/
+skills-lock.json
+
