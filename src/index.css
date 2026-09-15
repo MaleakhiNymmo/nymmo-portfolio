@@ -1,12 +1,15 @@
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 /* Hallmark · macrostructure: Tactile Editorial Grid · theme: dual (dark-obsidian & warm-paper) */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300..900;1,300..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  /* Active Display Font: Jost (Magazine / High-End Editorial Geometry) */
+  --font-display: "Jost", sans-serif;
+  /* Preserved Previous Display Font: Space Grotesk (Tech Editorial Backup) */
+  --font-display-space: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
@@ -22,6 +25,8 @@
   --color-rule: #27272a;
   --color-rule-light: #3f3f46;
   --outline-stroke: rgba(255, 255, 255, 0.7);
+  --color-status: #34d399;
+  --color-status-dot: #10b981;
 
   /* Multi-Layer Curtain Wipe Slabs (Dark Mode: Slate into Bright White) */
   --wipe-slab-1: #3A3A44;
@@ -43,6 +48,8 @@
   --color-rule: #1C1C1C;
   --color-rule-light: rgba(28, 28, 28, 0.22);
   --outline-stroke: #1C1C1C;
+  --color-status: #78350F;
+  --color-status-dot: #92400E;
 
   /* Multi-Layer Curtain Wipe Slabs (Light Mode: Crisp White into Charcoal Black) */
   --wipe-slab-1: #FFFFFF;
@@ -63,22 +70,26 @@ body {
   color: var(--color-ink);
 }
 
-/* Outlined Display Text Utility */
+/* Outlined Display Text Utility - Masked interior overlaps */
 .text-outline {
-  -webkit-text-stroke: 1.8px var(--outline-stroke);
-  color: transparent;
-  transition: -webkit-text-stroke 300ms ease;
+  -webkit-text-stroke: 3.5px var(--outline-stroke);
+  color: var(--bg-canvas);
+  paint-order: stroke fill;
+  transition: -webkit-text-stroke 300ms ease, color 300ms ease;
 }
 
 .text-outline-thick {
-  -webkit-text-stroke: 2.2px var(--outline-stroke);
-  color: transparent;
+  -webkit-text-stroke: 4.5px var(--outline-stroke);
+  color: var(--bg-canvas);
+  paint-order: stroke fill;
+  transition: -webkit-text-stroke 300ms ease, color 300ms ease;
 }
 
 @media (min-width: 768px) {
   .text-outline-thick {
-    -webkit-text-stroke: 2.6px var(--outline-stroke);
-    color: transparent;
+    -webkit-text-stroke: 5.5px var(--outline-stroke);
+    color: var(--bg-canvas);
+    paint-order: stroke fill;
   }
 }
 
@@ -96,6 +107,7 @@ body {
   display: flex;
   width: max-content;
   animation: marquee 22s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {

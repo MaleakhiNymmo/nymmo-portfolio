@@ -19,6 +19,7 @@ export default function App() {
   // Sync theme attribute to HTML tag and update dynamic favicon
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
     const faviconEl = document.getElementById('favicon') as HTMLLinkElement | null;
     if (faviconEl) {
       faviconEl.href = theme === 'paper' 

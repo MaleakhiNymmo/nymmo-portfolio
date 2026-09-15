@@ -119,7 +119,7 @@ export default function ProjectDetail({ theme, toggleTheme }: ProjectDetailProps
     <div className="min-h-screen w-full bg-[var(--bg-canvas)] text-[var(--color-ink)] font-sans selection:bg-[var(--color-ink)] selection:text-[var(--bg-canvas)]">
       
       {/* 1. STICKY EDITORIAL TOP BAR */}
-      <header className="sticky top-0 z-40 w-full px-5 sm:px-12 lg:px-20 py-4 sm:py-5 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]/95 backdrop-blur-md flex items-center justify-between font-mono text-xs tracking-wider select-none">
+      <header className="sticky top-0 z-50 w-full px-5 sm:px-12 lg:px-20 py-4 sm:py-5 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]/95 backdrop-blur-md flex items-center justify-between font-mono text-xs tracking-wider select-none">
         
         {/* Brand Mark & Back Link */}
         <div className="flex items-center gap-3">
@@ -203,7 +203,7 @@ export default function ProjectDetail({ theme, toggleTheme }: ProjectDetailProps
           </div>
 
           {/* Massive Display Heading */}
-          <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase tracking-tight text-[var(--color-ink)] leading-[0.9] mb-6">
+          <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl xl:text-9xl tracking-tight text-[var(--color-ink)] leading-[0.9] mb-6">
             {project.title}
           </h1>
 
@@ -331,7 +331,7 @@ export default function ProjectDetail({ theme, toggleTheme }: ProjectDetailProps
                   </span>
                 </div>
 
-                <h3 className="font-display font-bold text-2xl sm:text-3xl uppercase text-[var(--color-ink)] leading-tight mb-4">
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-[var(--color-ink)] leading-tight mb-4">
                   Problem Statement
                 </h3>
 
@@ -375,7 +375,7 @@ export default function ProjectDetail({ theme, toggleTheme }: ProjectDetailProps
             </span>
           </div>
 
-          <h3 className="font-display font-bold text-2xl sm:text-3xl uppercase text-[var(--color-ink)] leading-snug mb-3">
+          <h3 className="font-display font-bold text-2xl sm:text-3xl text-[var(--color-ink)] leading-snug mb-3">
             Architectural Approach
           </h3>
 

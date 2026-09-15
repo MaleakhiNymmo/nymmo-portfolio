@@ -1,100 +1,108 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowUpRight, 
-  Send, 
-  Map, 
-  Globe, 
-  Database, 
-  Plus, 
-  X, 
-  Sun, 
-  Moon, 
+import {
+  ArrowUpRight,
+  Send,
+  Map,
+  Globe,
+  Database,
+  Plus,
+  X,
+  Sun,
+  Moon,
   Download,
   Menu,
   Target
 } from 'lucide-react';
 import Magnetic from '../components/Magnetic';
 import BrandLogo from '../components/BrandLogo';
+import TechStackRoller from '../components/TechStackRoller';
+import GiantTextMarquee from '../components/GiantTextMarquee';
 import { PROJECTS } from '../data';
 
-interface StageModule {
-  number: string;
-  title: string;
-  domain: string;
-  summary: string;
-  details: string;
-  techStack: string[];
-}
-
-const STAGES: StageModule[] = [
-  {
-    number: 'STAGE 1',
-    title: 'SPATIAL DISCOVERY & WEB-GIS',
-    domain: 'Geo-Spatial Analytics',
-    summary: 'Designing interactive mapping engines, spatial clustering, and geo-data queries.',
-    details: 'Architected the BasoIn Web-GIS culinary navigation platform in Bandung. Integrated custom Mapbox tiles, Leaflet.js rendering, spatial radius filtering, and optimized geo-JSON data pipelines for rapid client-side rendering.',
-    techStack: ['Leaflet.js', 'Mapbox API', 'GeoJSON', 'React 19', 'Tailwind CSS']
-  },
-  {
-    number: 'STAGE 2',
-    title: 'BACKEND ARCHITECTURE & APIS',
-    domain: 'Full-Stack Services',
-    summary: 'Developing structured MVC backends, resilient RESTful endpoints, and authentication flows.',
-    details: 'Engineered multi-tenant service architectures using PHP (CodeIgniter 4) and Python. Developed standardized JWT auth systems, input sanitization routines, and decoupled business logic for seamless third-party consumption.',
-    techStack: ['PHP (CodeIgniter 4)', 'Python', 'Node.js', 'REST APIs', 'JWT']
-  },
-  {
-    number: 'STAGE 3',
-    title: 'DATABASE PROFILING & OPTIMIZATION',
-    domain: 'Query & Schema Tuning',
-    summary: 'Normalizing relational entities, rebuilding query plans, and accelerating report latency.',
-    details: 'Spearheaded database refactoring on the Perumda Tirta Raharja enterprise database. Optimized compound indexes, flattened redundant join trees, and reduced heavy report query times by 42% in live production.',
-    techStack: ['MySQL', 'PostgreSQL', 'SQL Optimization', 'Index Tuning', 'ETL Automation']
-  },
-  {
-    number: 'STAGE 4',
-    title: 'ENTERPRISE EGRC & SYSTEM SECURITY',
-    domain: 'Governance & Security',
-    summary: 'Implementing Enterprise Governance, Risk, Compliance frameworks, and access controls.',
-    details: 'Audited enterprise access matrices and developed automated risk scoring workflows for public utility administrative pipelines, ensuring adherence to strict internal auditing standards and OWASP web hygiene.',
-    techStack: ['EGRC Workflows', 'Role-Based Access Control', 'OWASP', 'Linux Scripting']
-  }
-];
+// ============================================================================
+// 🔒 CADANGAN / BACKUP LENGKAP: VERSI ALL-CAPS (HURUF BESAR SEMUA)
+// Jika sewaktu-waktu ingin kembali ke versi ALL-CAPS:
+// 1. Ganti ROLES_2_LINES & ROLES_3_LINES dengan data di bawah ini.
+// 2. Tambahkan kembali class "uppercase" pada:
+//    - Hero Mobile <h1> (line ~470, ~497, ~524)
+//    - Hero Desktop <h1> (line ~559, ~586)
+//    - Section 3 Selected Projects <h2> -> "SELECTED <span className=\"text-outline\">PROJECTS</span>" + class "uppercase"
+//    - Project Cards <h3> -> class "uppercase"
+//    - Section 4 Core Tech Arsenal <h2> -> "CORE TECH <br /><span className=\"text-outline\">ARSENAL</span>" + class "uppercase"
+//    - Section 5 Contact Me <h2> -> "CONTACT <br /><span className=\"text-outline text-outline-thick\">ME</span>" + class "uppercase"
+//    - Mobile Menu Drawer <span> -> class "uppercase"
+//
+// const ROLES_2_LINES_ALL_CAPS = [
+//   {
+//     solid: 'FULL-STACK',
+//     outline: 'DEVELOPER',
+//     badge: '1+ YR PRODUCTION EXP',
+//     tag: 'ENTERPRISE SYSTEMS & WEB-GIS PLATFORMS',
+//     desc: 'Specializing in building high-performance Web-GIS platforms, resilient backend service architectures, and interactive digital interfaces with 1+ years of proven production experience.'
+//   },
+//   {
+//     solid: 'DATA',
+//     outline: 'ENGINEER',
+//     badge: 'ACTIVE INTERNSHIP',
+//     tag: 'DATABASE OPTIMIZATION & DATA PIPELINES',
+//     desc: 'Executing real-world data engineering workflows: relational normalization, sub-second query plan tuning (reduced report latency by 42%), and automated ETL data processing routines.'
+//   }
+// ];
+//
+// const ROLES_3_LINES_ALL_CAPS = [
+//   {
+//     line1: 'FULL',
+//     line2: 'STACK',
+//     line3: 'DEVELOPER',
+//     badge: '1+ YR PRODUCTION EXP',
+//     tag: 'ENTERPRISE SYSTEMS & WEB-GIS PLATFORMS',
+//     desc: 'Specializing in building high-performance Web-GIS platforms, resilient backend service architectures, and interactive digital interfaces with 1+ years of proven production experience.'
+//   },
+//   {
+//     line1: 'JUNIOR',
+//     line2: 'DATA',
+//     line3: 'ENGINEER',
+//     badge: 'ACTIVE INTERNSHIP',
+//     tag: 'DATABASE OPTIMIZATION & DATA PIPELINES',
+//     desc: 'Executing real-world data engineering workflows: relational normalization, sub-second query plan tuning (reduced report latency by 42%), and automated ETL data processing routines.'
+//   }
+// ];
+// ============================================================================
 
 const ROLES_2_LINES = [
   {
-    solid: 'FULL-STACK',
-    outline: 'DEVELOPER',
+    solid: 'Full-Stack',
+    outline: 'Developer',
     badge: '1+ YR PRODUCTION EXP',
     tag: 'ENTERPRISE SYSTEMS & WEB-GIS PLATFORMS',
     desc: 'Specializing in building high-performance Web-GIS platforms, resilient backend service architectures, and interactive digital interfaces with 1+ years of proven production experience.'
   },
   {
-    solid: 'DATA',
-    outline: 'ENGINEER',
+    solid: 'Data',
+    outline: 'Engineer',
     badge: 'ACTIVE INTERNSHIP',
-    tag: 'DATABASE OPTIMIZATION & PIPELINES',
+    tag: 'DATABASE OPTIMIZATION & DATA PIPELINES',
     desc: 'Executing real-world data engineering workflows: relational normalization, sub-second query plan tuning (reduced report latency by 42%), and automated ETL data processing routines.'
   }
 ];
 
 const ROLES_3_LINES = [
   {
-    line1: 'FULL',
-    line2: 'STACK',
-    line3: 'DEVELOPER',
+    line1: 'Full',
+    line2: 'Stack',
+    line3: 'Developer',
     badge: '1+ YR PRODUCTION EXP',
     tag: 'ENTERPRISE SYSTEMS & WEB-GIS PLATFORMS',
     desc: 'Specializing in building high-performance Web-GIS platforms, resilient backend service architectures, and interactive digital interfaces with 1+ years of proven production experience.'
   },
   {
-    line1: 'JUNIOR',
-    line2: 'DATA',
-    line3: 'ENGINEER',
+    line1: 'Junior',
+    line2: 'Data',
+    line3: 'Engineer',
     badge: 'ACTIVE INTERNSHIP',
-    tag: 'DATABASE OPTIMIZATION & PIPELINES',
+    tag: 'DATABASE OPTIMIZATION & DATA PIPELINES',
     desc: 'Executing real-world data engineering workflows: relational normalization, sub-second query plan tuning (reduced report latency by 42%), and automated ETL data processing routines.'
   }
 ];
@@ -116,10 +124,9 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
   const [isWiping, setIsWiping] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
-  const [openStage, setOpenStage] = useState<string | null>('STAGE 1');
   const [copied, setCopied] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'data-engineering' | 'web-development' | 'mobile-computer-vision'>('all');
-  
+
   // Trigger Dual/Triple Line Multi-Layer Curtain Wipe transition
   const triggerRoleWipe = useCallback((targetIndex?: number) => {
     if (isWiping) return;
@@ -155,7 +162,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
     }, 6200);
     return () => clearInterval(interval);
   }, [triggerRoleWipe]);
-  
+
   // Contact Form state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
@@ -180,7 +187,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
     const handleScroll = () => {
       if (!heroRef.current) return;
       const scrollPos = window.scrollY + 250;
-      
+
       const heroOffset = heroRef.current?.offsetTop || 0;
       const aboutOffset = aboutRef.current?.offsetTop || 0;
       const worksOffset = worksRef.current?.offsetTop || 0;
@@ -228,19 +235,19 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
 
   return (
     <div className="min-h-screen w-full bg-[var(--bg-canvas)] text-[var(--color-ink)] font-sans">
-      
+
       {/* Top Bar Header Navigation */}
-      <header className="sticky top-0 z-40 w-full px-5 sm:px-12 lg:px-20 py-4 sm:py-5 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]/95 backdrop-blur-md flex items-center justify-between font-mono text-xs tracking-wider">
+      <header className="sticky top-0 z-50 w-full px-5 sm:px-12 lg:px-20 py-4 sm:py-5 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]/95 backdrop-blur-md flex items-center justify-between font-mono text-xs tracking-wider">
         {/* Brand Logo */}
-        <div 
+        <div
           onClick={() => scrollTo(heroRef)}
           className="flex items-center cursor-pointer group select-none"
           data-cursor-text="Home"
           title="Home"
         >
-          <BrandLogo 
-            theme={theme} 
-            className="w-9 h-9 sm:w-11 sm:h-11 transition-transform duration-300 group-hover:scale-110" 
+          <BrandLogo
+            theme={theme}
+            className="w-9 h-9 sm:w-11 sm:h-11 transition-transform duration-300 group-hover:scale-110"
           />
         </div>
 
@@ -285,9 +292,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
           <Magnetic strength={0.25}>
             <button
               onClick={() => scrollTo(worksRef)}
-              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${
-                activeSection === 'works' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
-              }`}
+              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${activeSection === 'works' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
+                }`}
             >
               Works
             </button>
@@ -295,19 +301,17 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
           <Magnetic strength={0.25}>
             <button
               onClick={() => scrollTo(aboutRef)}
-              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${
-                activeSection === 'about' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
-              }`}
+              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${activeSection === 'about' || activeSection === 'stack' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
+                }`}
             >
-              Stages
+              Stack
             </button>
           </Magnetic>
           <Magnetic strength={0.25}>
             <button
               onClick={() => scrollTo(contactRef)}
-              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${
-                activeSection === 'contact' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
-              }`}
+              className={`hover:text-[var(--color-ink)] transition-colors cursor-pointer ${activeSection === 'contact' ? 'font-bold underline underline-offset-4' : 'text-[var(--color-ink-2)]'
+                }`}
             >
               Contact
             </button>
@@ -349,14 +353,14 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.38, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-50 bg-[var(--bg-canvas)] text-[var(--color-ink)] flex flex-col justify-between p-6 sm:p-10 select-none overflow-y-auto"
+            className="fixed inset-0 z-[60] bg-[var(--bg-canvas)] text-[var(--color-ink)] flex flex-col justify-between p-6 sm:p-10 select-none overflow-y-auto"
           >
             {/* Drawer Top Row */}
             <div className="flex items-center justify-between pb-5 border-b border-[var(--color-rule)]">
               <div className="flex items-center">
-                <BrandLogo 
-                  theme={theme} 
-                  className="w-9 h-9" 
+                <BrandLogo
+                  theme={theme}
+                  className="w-9 h-9"
                 />
               </div>
               <button
@@ -376,9 +380,9 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               </span>
               <nav className="flex flex-col divide-y divide-[var(--color-rule-light)]">
                 {[
-                  { num: "01", label: "SELECTED WORKS", ref: worksRef, count: "05 PROJECTS" },
-                  { num: "02", label: "ENGINEERING STAGES", ref: aboutRef, count: "04 MODULES" },
-                  { num: "03", label: "CONTACT ARCHIVE", ref: contactRef, count: "DIRECT LINE" }
+                  { num: "01", label: "Selected Works", ref: worksRef, count: "05 PROJECTS" },
+                  { num: "02", label: "Core Tech Arsenal", ref: aboutRef, count: "16 STACKS" },
+                  { num: "03", label: "Contact Archive", ref: contactRef, count: "DIRECT LINE" }
                 ].map((item) => (
                   <button
                     key={item.num}
@@ -392,7 +396,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
                       <span className="font-mono text-xs text-[var(--color-ink-muted)]">
                         {item.num}
                       </span>
-                      <span className="font-display font-black text-2xl uppercase tracking-tight text-[var(--color-ink)] group-hover:translate-x-2 transition-transform duration-200">
+                      <span className="font-display font-black text-2xl tracking-tight text-[var(--color-ink)] group-hover:translate-x-2 transition-transform duration-200">
                         {item.label}
                       </span>
                     </div>
@@ -418,8 +422,14 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
                 <span>BANDUNG, WEST JAVA, ID</span>
                 <span>GMT+7</span>
               </div>
-              <div className="flex items-center gap-2 text-emerald-500 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <div
+                className="flex items-center gap-2 font-medium"
+                style={{ color: 'var(--color-status)' }}
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full animate-pulse"
+                  style={{ backgroundColor: 'var(--color-status-dot)' }}
+                />
                 <span>OPEN TO FULL-STACK & DATA ROLES</span>
               </div>
             </div>
@@ -428,10 +438,10 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
       </AnimatePresence>
 
       {/* 1. HERO SECTION */}
-      <main 
+      <main
         id="hero"
         ref={heroRef}
-        className="relative w-full px-6 sm:px-12 lg:px-20 pt-16 sm:pt-24 pb-20 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)] overflow-hidden"
+        className="relative w-full px-6 sm:px-12 lg:px-20 pt-16 sm:pt-24 pb-20 bg-[var(--bg-canvas)] overflow-hidden"
       >
         <div className="max-w-[1560px] mx-auto relative z-10">
           <div className="mb-16 select-none">
@@ -457,15 +467,15 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
 
             {/* ROLE ANIMATION: RESPONSIVE DUAL/TRIPLE LINE WIPE */}
             {/* Mobile View: 3 Lines */}
-            <div 
+            <div
               onClick={() => triggerRoleWipe()}
               className="cursor-pointer group flex sm:hidden flex-col items-start gap-1"
               data-cursor-text="Wipe Role"
               title="Click to wipe role focus"
             >
               {/* Line 1 */}
-              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[52px] min-[360px]:h-[62px] min-[390px]:h-[70px] min-[420px]:h-[76px]">
-                <h1 className="font-display font-black text-[48px] min-[360px]:text-[58px] min-[390px]:text-[66px] min-[420px]:text-[72px] uppercase leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
+              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[58px] min-[360px]:h-[68px] min-[390px]:h-[76px] min-[420px]:h-[82px]">
+                <h1 className="font-display font-black text-[48px] min-[360px]:text-[58px] min-[390px]:text-[66px] min-[420px]:text-[72px] leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
                   {ROLES_3_LINES[displayedRole1].line1}
                 </h1>
                 <AnimatePresence>
@@ -491,8 +501,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               </div>
 
               {/* Line 2 */}
-              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[52px] min-[360px]:h-[62px] min-[390px]:h-[70px] min-[420px]:h-[76px]">
-                <h1 className="font-display font-black text-[48px] min-[360px]:text-[58px] min-[390px]:text-[66px] min-[420px]:text-[72px] uppercase leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
+              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[58px] min-[360px]:h-[68px] min-[390px]:h-[76px] min-[420px]:h-[82px]">
+                <h1 className="font-display font-black text-[48px] min-[360px]:text-[58px] min-[390px]:text-[66px] min-[420px]:text-[72px] leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
                   {ROLES_3_LINES[displayedRole2].line2}
                 </h1>
                 <AnimatePresence>
@@ -518,8 +528,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               </div>
 
               {/* Line 3 */}
-              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[46px] min-[360px]:h-[54px] min-[390px]:h-[60px] min-[420px]:h-[66px]">
-                <h1 className="font-display font-black text-[42px] min-[360px]:text-[50px] min-[390px]:text-[56px] min-[420px]:text-[62px] uppercase leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
+              <div className="relative inline-flex items-end overflow-hidden py-0.5 pr-4 min-w-[240px] min-[390px]:min-w-[280px] h-[52px] min-[360px]:h-[60px] min-[390px]:h-[66px] min-[420px]:h-[72px]">
+                <h1 className="font-display font-black text-[42px] min-[360px]:text-[50px] min-[390px]:text-[56px] min-[420px]:text-[62px] leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap tracking-[-0.03em]">
                   <span className="text-outline text-outline-thick">{ROLES_3_LINES[displayedRole3].line3}</span>
                 </h1>
                 <AnimatePresence>
@@ -546,15 +556,15 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
             </div>
 
             {/* Desktop & Tablet View: 2 Lines */}
-            <div 
+            <div
               onClick={() => triggerRoleWipe()}
               className="cursor-pointer group hidden sm:flex flex-col items-start gap-1 sm:gap-2"
               data-cursor-text="Wipe Role"
               title="Click to wipe role focus"
             >
               {/* Line 1 */}
-              <div className="relative inline-block items-end overflow-hidden py-1 pr-6 sm:min-w-[540px] md:min-w-[680px] lg:min-w-[820px] xl:min-w-[940px]">
-                <h1 className="font-display font-black sm:text-8xl md:text-9xl lg:text-[116px] xl:text-[136px] uppercase leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap">
+              <div className="relative inline-block items-end overflow-hidden pt-1 pb-5 sm:pb-7 pr-6 sm:min-w-[540px] md:min-w-[680px] lg:min-w-[820px] xl:min-w-[940px]">
+                <h1 className="font-display font-black sm:text-8xl md:text-9xl lg:text-[116px] xl:text-[136px] leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap">
                   {ROLES_2_LINES[displayedRole1].solid}
                 </h1>
                 <AnimatePresence>
@@ -580,8 +590,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               </div>
 
               {/* Line 2 */}
-              <div className="relative inline-block items-end overflow-hidden py-1 pr-6 sm:min-w-[580px] md:min-w-[740px] lg:min-w-[880px] xl:min-w-[1020px]">
-                <h1 className="font-display font-black sm:text-8xl md:text-9xl lg:text-[116px] xl:text-[136px] uppercase leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap">
+              <div className="relative inline-block items-end overflow-hidden pt-1 pb-5 sm:pb-7 pr-6 sm:min-w-[580px] md:min-w-[740px] lg:min-w-[880px] xl:min-w-[1020px]">
+                <h1 className="font-display font-black sm:text-8xl md:text-9xl lg:text-[116px] xl:text-[136px] leading-[0.88] text-[var(--color-ink)] select-none whitespace-nowrap">
                   <span className="text-outline text-outline-thick">{ROLES_2_LINES[displayedRole2].outline}</span>
                 </h1>
                 <AnimatePresence>
@@ -609,7 +619,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
           </div>
 
           {/* Bio Grid Diptych */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
@@ -617,30 +627,34 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
             className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center pt-10 border-t border-[var(--color-rule)]"
           >
             <div className="lg:col-span-5 flex items-center gap-8">
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl border border-[var(--color-rule)] bg-[var(--bg-surface)] flex items-center justify-center p-6 overflow-hidden shadow-inner group shrink-0">
-                <span className="font-display font-black text-4xl sm:text-6xl text-[var(--color-ink)] tracking-tighter select-none">
-                  NIMO.
-                </span>
-                <div className="absolute inset-0 border border-dashed border-[var(--color-rule)] rounded-xl m-2 pointer-events-none" />
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <span className="font-mono text-[9px] tracking-[0.25em] text-[var(--color-ink-muted)] animate-[spin_24s_linear_infinite] uppercase">
-                    • MALEAKHI NYMMO • BANDUNG ID •
-                  </span>
+              <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl border border-black bg-white p-2.5 sm:p-3 flex items-center justify-center shadow-md group shrink-0">
+                <div className="relative w-full h-full rounded-xl border border-dashed border-black overflow-hidden bg-white">
+                  <img
+                    src="/img/nimo.png"
+                    alt="Maleakhi Nymmo Augustus"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 select-none"
+                  />
                 </div>
               </div>
 
               <div className="font-mono text-xs sm:text-sm text-[var(--color-ink-2)] space-y-1.5">
                 <span className="block font-bold text-sm sm:text-base text-[var(--color-ink)]">Maleakhi Nymmo Augustus</span>
-                <span>Bandung, West Java, ID • GMT+7</span>
-                <span className="block text-xs text-emerald-600 dark:text-emerald-400 font-semibold pt-1">
-                  ● Open to Full-Stack & Data Engineering roles
+                <span
+                  className="flex items-start gap-2 text-xs font-semibold pt-1"
+                  style={{ color: 'var(--color-status)' }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full animate-pulse shrink-0 mt-1"
+                    style={{ backgroundColor: 'var(--color-status-dot)' }}
+                  />
+                  <span>Open to Full-Stack & Data Engineering roles</span>
                 </span>
               </div>
             </div>
 
             <div className="lg:col-span-7">
               <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-[var(--color-ink)] font-light max-w-3xl mb-4">
-                Hi, my name is <span className="font-medium">Maleakhi Nymmo Augustus</span> (often known as Nymo or August). Computer Engineering student combining software architecture with database performance.
+                Hi, my name is <span className="font-medium">Maleakhi Nymmo Augustus</span> (often known as Nymmo or August). Computer Engineering student combining software architecture with database performance.
               </p>
               <AnimatePresence mode="wait">
                 <motion.p
@@ -659,28 +673,20 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
         </div>
       </main>
 
-      {/* 2. INFINITE MARQUEE TICKER TAPE */}
-      <div className="w-full border-b border-[var(--color-rule)] py-4 overflow-hidden select-none bg-[var(--bg-surface)]">
-        <div className="animate-marquee font-display font-bold text-xs sm:text-base tracking-[0.24em] uppercase text-[var(--color-ink)] flex items-center gap-10 sm:gap-14">
-          <span>SELECTED ARCHIVES</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>DATA ENGINEERING PIPELINES</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>APACHE AIRFLOW & BIGQUERY</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>SPATIAL SYSTEMS & WEB-GIS</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>DATABASE OPTIMIZATION</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>ENTERPRISE EGRC ARCHITECTURE</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-          <span>SELECTED ARCHIVES</span> <span className="text-[var(--color-ink-muted)]">✕</span>
-        </div>
-      </div>
+      {/* 2. GIANT INTERACTIVE EDITORIAL MARQUEE (Mriya Studio Inspired) */}
+      <GiantTextMarquee
+        theme={theme}
+      />
 
       {/* 3. SELECTED WORKS (Full-Width Framed Grid with Dynamic Category Filter) */}
-      <section 
+      <section
         id="works"
         ref={worksRef}
         className="w-full border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]"
       >
         {/* Header Bar with Category Filter Tabs */}
         <div className="w-full px-6 sm:px-12 lg:px-20 py-10 border-b border-[var(--color-rule)]">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -691,8 +697,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-2)] block mb-1">
                 PORTFOLIO ARCHIVES
               </span>
-              <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-[var(--color-ink)]">
-                SELECTED <span className="text-outline">PROJECTS</span>
+              <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-[var(--color-ink)]">
+                Selected <span className="text-outline">Projects</span>
               </h2>
             </div>
 
@@ -701,11 +707,10 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <Magnetic strength={0.2}>
                 <button
                   onClick={() => setSelectedCategory('all')}
-                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-                    selectedCategory === 'all'
-                      ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
-                      : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${selectedCategory === 'all'
+                    ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
+                    : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
+                    }`}
                 >
                   ALL [06]
                 </button>
@@ -714,11 +719,10 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <Magnetic strength={0.2}>
                 <button
                   onClick={() => setSelectedCategory('data-engineering')}
-                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-                    selectedCategory === 'data-engineering'
-                      ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
-                      : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${selectedCategory === 'data-engineering'
+                    ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
+                    : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
+                    }`}
                 >
                   DATA ENGINEERING [01]
                 </button>
@@ -727,11 +731,10 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <Magnetic strength={0.2}>
                 <button
                   onClick={() => setSelectedCategory('mobile-computer-vision')}
-                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-                    selectedCategory === 'mobile-computer-vision'
-                      ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
-                      : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${selectedCategory === 'mobile-computer-vision'
+                    ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
+                    : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
+                    }`}
                 >
                   MOBILE & COMPUTER VISION [01]
                 </button>
@@ -740,11 +743,10 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <Magnetic strength={0.2}>
                 <button
                   onClick={() => setSelectedCategory('web-development')}
-                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-                    selectedCategory === 'web-development'
-                      ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
-                      : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${selectedCategory === 'web-development'
+                    ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--bg-canvas)] font-bold'
+                    : 'border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink)]'
+                    }`}
                 >
                   WEB DEVELOPMENT [04]
                 </button>
@@ -766,9 +768,8 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.55, delay: (idx % 2) * 0.1, ease: [0.25, 1, 0.5, 1] }}
-                  className={`p-8 sm:p-12 lg:p-14 flex flex-col justify-between hover:bg-[var(--bg-surface)] transition-all duration-300 group border-b border-[var(--color-rule)] ${
-                    isLeftColumn ? 'lg:border-r border-[var(--color-rule)]' : ''
-                  }`}
+                  className={`p-8 sm:p-12 lg:p-14 flex flex-col justify-between hover:bg-[var(--bg-surface)] transition-all duration-300 group border-b border-[var(--color-rule)] ${isLeftColumn ? 'lg:border-r border-[var(--color-rule)]' : ''
+                    }`}
                 >
                   <div>
                     {/* Top Meta */}
@@ -783,7 +784,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
 
                     {/* Project Title */}
                     <Link to={`/project/${project.id}`} className="block group-hover:underline">
-                      <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-[var(--color-ink)] uppercase mb-2 transition-transform duration-200 group-hover:translate-x-1">
+                      <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-[var(--color-ink)] mb-2 transition-transform duration-200 group-hover:translate-x-1">
                         {project.title}
                       </h3>
                     </Link>
@@ -885,7 +886,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
                         </Magnetic>
                       )}
                       <Magnetic strength={0.3}>
-                        <Link 
+                        <Link
                           to={`/project/${project.id}`}
                           className="inline-flex items-center gap-1.5 font-bold text-[var(--color-ink)] hover:underline uppercase"
                           data-cursor-text="Read"
@@ -903,129 +904,55 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
         </div>
       </section>
 
-      {/* 4. STAGES OF SYSTEM DEVELOPMENT */}
-      <section 
-        id="about"
+      {/* 4. CORE TECH ARSENAL (3-Row Zigzag Infinite Rolling Showcase) */}
+      <section
+        id="stack"
         ref={aboutRef}
-        className="w-full px-6 sm:px-12 lg:px-20 py-20 sm:py-28 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]"
+        className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-20 sm:py-28 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]"
       >
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.25, 1, 0.5, 1] }}
-          className="max-w-5xl mx-auto mb-14 text-center select-none"
+          className="max-w-5xl mx-auto mb-12 text-center select-none"
         >
-          <h2 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[var(--color-ink)] mb-3">
-            STAGES OF SYSTEM <br />
-            <span className="text-outline">DEVELOPMENT</span>
+          {/* <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-2)] block mb-2">
+            INFINITE MARQUEE • STAGGERED TOOLCHAIN ARCHITECTURE */}
+          {/* </span> */}
+          <h2 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[var(--color-ink)] mb-3">
+            Core Tech <br />
+            <span className="text-outline">Arsenal</span>
           </h2>
           <p className="font-mono text-xs sm:text-sm text-[var(--color-ink-2)] uppercase tracking-widest">
-            Technical Execution Blueprint & Architectural Workflow
+            Production-Grade Toolchains & Architectural Stack
           </p>
         </motion.div>
 
-        {/* Accordion Component */}
-        <div className="max-w-5xl mx-auto divide-y divide-[var(--color-rule)] border-y border-[var(--color-rule)]">
-          {STAGES.map((stage, sIdx) => {
-            const isOpen = openStage === stage.number;
-            return (
-              <motion.div 
-                key={stage.number} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: sIdx * 0.08, ease: [0.25, 1, 0.5, 1] }}
-                className="transition-colors"
-              >
-                {/* Accordion Header */}
-                <div 
-                  onClick={() => setOpenStage(isOpen ? null : stage.number)}
-                  className="py-6 sm:py-8 flex items-center justify-between cursor-pointer group select-none hover-target"
-                  data-cursor-text={isOpen ? 'Close' : 'Open'}
-                >
-                  <div className="flex items-center gap-6 sm:gap-14">
-                    <span className="font-mono text-xs sm:text-sm text-[var(--color-ink-2)] tracking-widest min-w-[70px] group-hover:text-[var(--color-ink)] transition-colors">
-                      {stage.number}
-                    </span>
-                    <h3 className="font-display font-bold text-lg sm:text-2xl text-[var(--color-ink)] uppercase tracking-wide group-hover:translate-x-1.5 transition-transform duration-200">
-                      {stage.title}
-                    </h3>
-                  </div>
-
-                  <Magnetic strength={0.35}>
-                    <motion.div 
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ type: "spring", stiffness: 350, damping: 24 }}
-                      className="p-1.5 rounded-full border border-[var(--color-rule)] text-[var(--color-ink)] group-hover:border-[var(--color-ink)] group-hover:bg-[var(--bg-surface)] transition-colors"
-                    >
-                      <Plus className="w-5 h-5" />
-                    </motion.div>
-                  </Magnetic>
-                </div>
-
-                {/* Accordion Expanded Body */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pb-8 pl-0 sm:pl-[126px] pr-4 space-y-4">
-                        <motion.p 
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.05 }}
-                          className="text-sm sm:text-base leading-relaxed text-[var(--color-ink)] font-light max-w-3xl"
-                        >
-                          {stage.details}
-                        </motion.p>
-                        <div className="flex flex-wrap items-center gap-2 pt-2">
-                          <span className="font-mono text-xs text-[var(--color-ink-2)] uppercase">Toolchain:</span>
-                          {stage.techStack.map((tech, i) => (
-                            <motion.span 
-                              key={tech}
-                              initial={{ opacity: 0, scale: 0.9, y: 4 }}
-                              animate={{ opacity: 1, scale: 1, y: 0 }}
-                              transition={{ duration: 0.25, delay: 0.08 + i * 0.035 }}
-                              className="font-mono text-xs px-2.5 py-1 rounded border border-[var(--color-rule)] bg-[var(--bg-surface)] text-[var(--color-ink)] hover:border-[var(--color-ink)] transition-colors"
-                            >
-                              {tech}
-                            </motion.span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* 3-Row Zigzag Infinite Rolling Tech Stack */}
+        <TechStackRoller theme={theme} />
       </section>
 
+
       {/* 5. CONTACT ME */}
-      <section 
+      <section
         id="contact"
         ref={contactRef}
         className="w-full px-6 sm:px-12 lg:px-20 py-20 sm:py-28 border-b border-[var(--color-rule)] bg-[var(--bg-canvas)]"
       >
         <div className="max-w-[1560px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          
+
           {/* Left Statement */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
             className="lg:col-span-6 select-none"
           >
-            <h2 className="font-display font-black text-6xl sm:text-8xl lg:text-[112px] uppercase tracking-tight text-[var(--color-ink)] leading-[0.85] mb-10">
-              CONTACT <br />
-              <span className="text-outline text-outline-thick">ME</span>
+            <h2 className="font-display font-black text-6xl sm:text-8xl lg:text-[112px] tracking-tight text-[var(--color-ink)] leading-[0.85] mb-10">
+              Contact <br />
+              <span className="text-outline text-outline-thick">Me</span>
             </h2>
 
             <div className="grid grid-cols-2 gap-8 pt-10 border-t border-[var(--color-rule)] font-mono text-xs sm:text-sm">
@@ -1054,7 +981,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
               <div>
                 <span className="font-bold uppercase tracking-widest text-[var(--color-ink-2)] block mb-4">DIRECT LINE</span>
                 <Magnetic strength={0.2}>
-                  <div 
+                  <div
                     onClick={copyEmail}
                     className="cursor-pointer group flex flex-col gap-1.5 text-[var(--color-ink)]"
                     data-cursor-text={copied ? "Copied!" : "Copy"}
@@ -1070,7 +997,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
           </motion.div>
 
           {/* Right Inquiry Message Console */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -1080,7 +1007,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
             <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-ink-2)] block mb-2">
               INQUIRY CONSOLE
             </span>
-            <h3 className="font-display font-bold text-2xl uppercase text-[var(--color-ink)] mb-8">
+            <h3 className="font-display font-bold text-2xl text-[var(--color-ink)] mb-8">
               Initiate Technical Dialogue
             </h3>
 
@@ -1153,7 +1080,7 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
       </section>
 
       {/* 6. BOTTOM FOOTER COLOPHON */}
-      <motion.footer 
+      <motion.footer
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -1162,9 +1089,9 @@ export default function HomeView({ theme, toggleTheme, isThemeWiping }: HomeView
       >
         <div className="max-w-[1560px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <BrandLogo 
-              theme={theme} 
-              className="w-4 h-4 opacity-80" 
+            <BrandLogo
+              theme={theme}
+              className="w-4 h-4 opacity-80"
             />
             <span className="font-bold text-[var(--color-ink)]">Maleakhi Nymmo Augustus © 2026</span>
           </div>

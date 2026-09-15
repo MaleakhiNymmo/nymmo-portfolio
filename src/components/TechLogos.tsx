@@ -40,6 +40,25 @@ export const PytestLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored
   </svg>
 );
 
+export const GitHubLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? 'var(--color-ink)' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>GitHub</title>
+    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.53 1.03 1.53 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+  </svg>
+);
+
+export const LaravelLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill="none" stroke={colored ? '#FF2D20' : 'currentColor'} strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>Laravel</title>
+    <path d="M10.5 3.5 19.5 8.7v10.4l-9-5.2z" fill={colored ? '#FF2D2018' : 'transparent'} />
+    <path d="M10.5 3.5 1.5 8.7l9 5.2 9-5.2" fill={colored ? '#FF2D2025' : 'transparent'} />
+    <path d="M1.5 8.7v10.4l9 5.2" fill={colored ? '#FF2D2010' : 'transparent'} />
+    <path d="M15 11.5v-3.5l4.5 2.6v3.5z" fill={colored ? '#FF2D2030' : 'transparent'} />
+    <path d="m15 8 4.5 2.6" />
+    <path d="m10.5 13.9 4.5-2.6" />
+  </svg>
+);
+
 export const GitHubActionsLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
   <svg role="img" viewBox="0 0 24 24" fill={colored ? '#2088FF' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
     <title>GitHub Actions</title>
@@ -74,9 +93,12 @@ export const FastAPILogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colore
 );
 
 export const ReactNativeLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
-  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#61DAFB' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg role="img" viewBox="0 0 128 128" className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
     <title>React Native</title>
-    <path d="M12 9.408c-1.432 0-2.592 1.16-2.592 2.592 0 1.432 1.16 2.592 2.592 2.592 1.432 0 2.592-1.16 2.592-2.592 0-1.432-1.16-2.592-2.592-2.592zm9.324 1.411c-.24-1.157-.96-2.193-2.028-2.918-.408-.276-.864-.492-1.344-.648.24-.768.324-1.572.24-2.388-.168-1.584-1.092-2.928-2.52-3.648-1.428-.72-3.108-.636-4.464.228-.6.384-1.104.9-1.476 1.512-.372-.612-.876-1.128-1.476-1.512-1.356-.864-3.036-.948-4.464-.228-1.428.72-2.352 2.064-2.52 3.648-.084.816 0 1.62.24 2.388-.48.156-.936.372-1.344.648-1.068.725-1.788 1.761-2.028 2.918-.264 1.296.06 2.628.876 3.648.816 1.02 2.064 1.62 3.396 1.62.336 0 .684-.036 1.02-.12-.048.744.048 1.5.288 2.22.468 1.404 1.548 2.508 2.952 3.012.708.252 1.44.384 2.184.384.804 0 1.596-.156 2.34-.468.648-.276 1.224-.696 1.68-1.224.456.528 1.032.948 1.68 1.224.744.312 1.536.468 2.34.468.744 0 1.476-.132 2.184-.384 1.404-.504 2.484-1.608 2.952-3.012.24-.72.336-1.476.288-2.22.336.084.684.12 1.02.12 1.332 0 2.58-.6 3.396-1.62.816-1.02 1.14-2.352.876-3.648z" />
+    <g fill={colored ? '#61DAFB' : 'currentColor'}>
+      <circle cx="64" cy="64" r="11.4" />
+      <path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-15.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22.1 10 22.1 15.6 0 4.7-5.8 9.7-15.7 13.4z" />
+    </g>
   </svg>
 );
 
@@ -111,10 +133,89 @@ export const HuggingFaceLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', co
   </svg>
 );
 
+export const ReactLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="-11.5 -10.23174 23 20.46348" fill="none" stroke={colored ? '#61DAFB' : 'currentColor'} strokeWidth="1" className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>React</title>
+    <circle cx="0" cy="0" r="2.05" fill={colored ? '#61DAFB' : 'currentColor'} stroke="none" />
+    <ellipse rx="11" ry="4.2" />
+    <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+    <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+  </svg>
+);
+
+export const TypeScriptLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 128 128" className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>TypeScript</title>
+    <path fill={colored ? '#fff' : 'transparent'} d="M22.67 47h99.67v73.67H22.67z" />
+    <path fill={colored ? '#007acc' : 'currentColor'} d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z" />
+  </svg>
+);
+
+export const TailwindLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#06B6D4' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>Tailwind CSS</title>
+    <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z" />
+  </svg>
+);
+
+export const ThreeLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#000000' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>Three.js</title>
+    <path d="M21.942 16.594l-9.19-15.918a.867.867 0 0 0-1.504 0L2.058 16.594a.867.867 0 0 0 .752 1.3h18.38a.867.867 0 0 0 .752-1.3zm-9.942-12.72l7.344 12.72H4.656L12 3.874z" />
+  </svg>
+);
+
+export const MapboxLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#4264FB' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>Mapbox / Leaflet</title>
+    <path d="M12 0C7.029 0 3 4.029 3 9c0 5.25 7.5 13.5 8.25 14.25.375.375 1.125.375 1.5 0C13.5 22.5 21 14.25 21 9c0-4.971-4.029-9-9-9zm0 12.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" />
+  </svg>
+);
+
+export const MySqlLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#4479A1' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>MySQL</title>
+    <path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08c-.378 2.045-.876 3.533-1.492 4.46-.482.716-1.01 1.073-1.583 1.073-.153 0-.34-.046-.566-.138v-.494c.11.017.24.026.386.026.268 0 .483-.075.647-.222.197-.18.295-.382.295-.605 0-.155-.077-.47-.23-.944L6.23 14.615h.91l.727 2.36c.164.536.233.91.205 1.123.4-1.064.678-2.227.835-3.483zm12.325 4.08h-2.63v-5.53h.885v4.85h1.745zm-3.32.135l-1.016-.5c.09-.076.177-.158.255-.25.433-.506.648-1.258.648-2.253 0-1.83-.718-2.746-2.155-2.746-.704 0-1.254.232-1.65.697-.43.508-.646 1.256-.646 2.245 0 .972.19 1.686.574 2.14.35.41.877.615 1.583.615.264 0 .506-.033.725-.098l1.325.772.36-.622zM15.5 17.588c-.225-.36-.337-.94-.337-1.736 0-1.393.424-2.09 1.27-2.09.443 0 .77.167.977.5.224.362.336.936.336 1.723 0 1.404-.424 2.108-1.27 2.108-.445 0-.77-.167-.978-.5zm-1.658-.425c0 .47-.172.856-.516 1.156-.344.3-.803.45-1.384.45-.543 0-1.064-.172-1.573-.515l.237-.476c.438.22.833.328 1.19.328.332 0 .593-.073.783-.22a.754.754 0 00.3-.615c0-.33-.23-.61-.648-.845-.388-.213-1.163-.657-1.163-.657-.422-.307-.632-.636-.632-1.177 0-.45.157-.81.47-1.085.315-.278.72-.415 1.22-.415.512 0 .98.136 1.4.41l-.213.476a2.726 2.726 0 00-1.064-.23c-.283 0-.502.068-.654.206a.685.685 0 00-.248.524c0 .328.234.61.666.85.393.215 1.187.67 1.187.67.433.305.648.63.648 1.168zm9.382-5.852c-.535-.014-.95.04-1.297.188-.1.04-.26.04-.274.167.055.053.063.14.11.214.08.134.218.313.346.407.14.11.28.216.427.31.26.16.555.255.81.416.145.094.293.213.44.313.073.05.12.14.214.172v-.02c-.046-.06-.06-.147-.105-.214-.067-.067-.134-.127-.2-.193a3.223 3.223 0 00-.695-.675c-.214-.146-.682-.35-.77-.595l-.013-.014c.146-.013.32-.066.46-.106.227-.06.435-.047.67-.106.106-.027.213-.06.32-.094v-.06c-.12-.12-.21-.283-.334-.395a8.867 8.867 0 00-1.104-.823c-.21-.134-.476-.22-.697-.334-.08-.04-.214-.06-.26-.127-.12-.146-.19-.34-.275-.514a17.69 17.69 0 01-.547-1.163c-.12-.262-.193-.523-.34-.763-.69-1.137-1.437-1.826-2.586-2.5-.247-.14-.543-.2-.856-.274-.167-.008-.334-.02-.5-.027-.11-.047-.216-.174-.31-.235-.38-.24-1.364-.76-1.644-.072-.18.434.267.862.422 1.082.115.153.26.328.34.5.047.116.06.235.107.356.106.294.207.622.347.897.073.14.153.287.247.413.054.073.146.107.167.227-.094.136-.1.334-.154.5-.24.757-.146 1.693.194 2.25.107.166.362.534.703.393.3-.12.234-.5.32-.835.02-.08.007-.133.048-.187v.015c.094.188.188.367.274.555.206.328.566.668.867.895.16.12.287.328.487.402v-.02h-.015c-.043-.058-.1-.086-.154-.133a3.445 3.445 0 01-.35-.4 8.76 8.76 0 01-.747-1.218c-.11-.21-.202-.436-.29-.643-.04-.08-.04-.2-.107-.24-.1.146-.247.273-.32.453-.127.288-.14.642-.188 1.01-.027.007-.014 0-.027.014-.214-.052-.287-.274-.367-.46-.2-.475-.233-1.238-.06-1.785.047-.14.247-.582.167-.716-.042-.127-.174-.2-.247-.303a2.478 2.478 0 01-.24-.427c-.16-.374-.24-.788-.414-1.162-.08-.173-.22-.354-.334-.513-.127-.18-.267-.307-.368-.52-.033-.073-.08-.194-.027-.274.014-.054.042-.075.094-.09.088-.072.335.022.422.062.247.1.455.194.662.334.094.066.195.193.315.226h.14c.214.047.455.014.655.073.355.114.675.28.962.46a5.953 5.953 0 012.085 2.286c.08.154.115.295.188.455.14.33.313.663.455.982.14.315.275.636.476.897.1.14.502.213.682.286.133.06.34.115.46.188.23.14.454.3.67.454.11.076.443.243.463.378z" />
+  </svg>
+);
+
+export const PhpLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#777BB4' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>PHP</title>
+    <path d="M7.01 10.207h-.944l-.515 2.648h.838c.556 0 .97-.105 1.242-.314.272-.21.455-.559.55-1.049.092-.47.05-.802-.124-.995-.175-.193-.523-.29-1.047-.29zM12 5.688C5.373 5.688 0 8.514 0 12s5.373 6.313 12 6.313S24 15.486 24 12c0-3.486-5.373-6.312-12-6.312zm-3.26 7.451c-.261.25-.575.438-.917.551-.336.108-.765.164-1.285.164H5.357l-.327 1.681H3.652l1.23-6.326h2.65c.797 0 1.378.209 1.744.628.366.418.476 1.002.33 1.752a2.836 2.836 0 0 1-.305.847c-.143.255-.33.49-.561.703zm4.024.715l.543-2.799c.063-.318.039-.536-.068-.651-.107-.116-.336-.174-.687-.174H11.46l-.704 3.625H9.388l1.23-6.327h1.367l-.327 1.682h1.218c.767 0 1.295.134 1.586.401s.378.7.263 1.299l-.572 2.944h-1.389zm7.597-2.265a2.782 2.782 0 0 1-.305.847c-.143.255-.33.49-.561.703a2.44 2.44 0 0 1-.917.551c-.336.108-.765.164-1.286.164h-1.18l-.327 1.682h-1.378l1.23-6.326h2.649c.797 0 1.378.209 1.744.628.366.417.477 1.001.331 1.751zM17.766 10.207h-.943l-.516 2.648h.838c.557 0 .971-.105 1.242-.314.272-.21.455-.559.551-1.049.092-.47.049-.802-.125-.995s-.524-.29-1.047-.29z" />
+  </svg>
+);
+
+export const LinuxLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill={colored ? '#FCC624' : 'currentColor'} className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>Linux</title>
+    <path d="M12.002 0c-2.072 0-3.791 1.77-3.791 3.904 0 .428.067.844.2 1.239C6.67 6.134 5.5 8.358 5.5 10.958c0 1.583.5 3.033 1.346 4.195-.414.938-.857 2.176-.857 3.336 0 2.56 2.686 4.511 6.011 4.511 3.326 0 6.012-1.951 6.012-4.511 0-1.16-.443-2.398-.857-3.336.845-1.162 1.346-2.612 1.346-4.195 0-2.6-1.17-4.824-2.91-5.815.132-.395.2-.811.2-1.239C15.791 1.77 14.073 0 12.002 0z" />
+  </svg>
+);
+
+export const YoloLogo: React.FC<LogoProps> = ({ className = 'w-5 h-5', colored = true, ...props }) => (
+  <svg role="img" viewBox="0 0 24 24" fill="none" stroke={colored ? '#00D8F6' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <title>YOLOv11</title>
+    <path d="M3 8V5a2 2 0 0 1 2-2h3" />
+    <path d="M16 3h3a2 2 0 0 1 2 2v3" />
+    <path d="M21 16v3a2 2 0 0 1-2 2h-3" />
+    <path d="M8 21H5a2 2 0 0 1-2-2v-3" />
+    <circle cx="12" cy="9" r="2.5" fill={colored ? '#00D8F6' : 'currentColor'} stroke="none" />
+    <path d="M12 11.5v5.5" />
+    <path d="M9.5 14.5h5" />
+  </svg>
+);
+
 export const getTechLogo = (tech: string, className = 'w-5 h-5', colored = true) => {
   const t = tech.toLowerCase();
+  if (t.includes('yolo')) return <YoloLogo className={className} colored={colored} />;
   if (t.includes('fastapi')) return <FastAPILogo className={className} colored={colored} />;
   if (t.includes('react native') || t.includes('native')) return <ReactNativeLogo className={className} colored={colored} />;
+  if (t.includes('react')) return <ReactLogo className={className} colored={colored} />;
+  if (t.includes('typescript') || t === 'ts') return <TypeScriptLogo className={className} colored={colored} />;
+  if (t.includes('tailwind')) return <TailwindLogo className={className} colored={colored} />;
+  if (t.includes('three')) return <ThreeLogo className={className} colored={colored} />;
+  if (t.includes('leaflet') || t.includes('mapbox') || t.includes('gis') || t.includes('spatial')) return <MapboxLogo className={className} colored={colored} />;
   if (t.includes('pytorch') || t.includes('torch')) return <PyTorchLogo className={className} colored={colored} />;
   if (t.includes('opencv')) return <OpenCVLogo className={className} colored={colored} />;
   if (t.includes('hugging') || t.includes('huggingface')) return <HuggingFaceLogo className={className} colored={colored} />;
@@ -122,11 +223,17 @@ export const getTechLogo = (tech: string, className = 'w-5 h-5', colored = true)
   if (t.includes('airflow')) return <AirflowLogo className={className} colored={colored} />;
   if (t.includes('dbt')) return <DbtLogo className={className} colored={colored} />;
   if (t.includes('postgres')) return <PostgresLogo className={className} colored={colored} />;
+  if (t.includes('mysql')) return <MySqlLogo className={className} colored={colored} />;
+  if (t.includes('php') || t.includes('codeigniter')) return <PhpLogo className={className} colored={colored} />;
+  if (t.includes('linux') || t.includes('bash') || t.includes('scripting')) return <LinuxLogo className={className} colored={colored} />;
   if (t.includes('mongo')) return <MongoLogo className={className} colored={colored} />;
   if (t.includes('pytest') || t.includes('test')) return <PytestLogo className={className} colored={colored} />;
-  if (t.includes('github') || t.includes('action')) return <GitHubActionsLogo className={className} colored={colored} />;
+  if (t.includes('laravel')) return <LaravelLogo className={className} colored={colored} />;
+  if (t.includes('github actions') || t.includes('action')) return <GitHubActionsLogo className={className} colored={colored} />;
+  if (t.includes('github')) return <GitHubLogo className={className} colored={colored} />;
   if (t.includes('slack')) return <SlackLogo className={className} colored={colored} />;
   if (t.includes('docker')) return <DockerLogo className={className} colored={colored} />;
   return null;
 };
+
 
